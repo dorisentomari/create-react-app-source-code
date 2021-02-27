@@ -11,23 +11,38 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 //
 const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
+// tenser 解析 ES6 等语法
 const TerserPlugin = require('terser-webpack-plugin');
+// 分离 CSS
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// 压缩 CSS 资源，cssnano 是PostCSS 的 CSS 优化和分解插件，cssnano采用格式很好的css，并通过许多优化，确保最终生成环境尽可能小
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+// 对 PostCSS 的容错 CSS 解析器，发现和修复语法错误,能够解析任何输入
 const safePostCssParser = require('postcss-safe-parser');
+// 生成 manifest.json 文件
 const ManifestPlugin = require('webpack-manifest-plugin');
+// 在 html 里插入变量，基于 html-webpack-plugin
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+// 提供 service.work
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+// 监控缺失的包
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
+// 模块作用域
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+// 鉴别本地 css 模块
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
+// eslint
 const ESLintPlugin = require('eslint-webpack-plugin');
 const paths = require('./paths');
 const modules = require('./modules');
 const getClientEnvironment = require('./env');
+// 模块没有找到
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+// 检查 ts
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
+// ts 格式化
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+// 快速刷新，或者叫热重载更新
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const postcssNormalize = require('postcss-normalize');
@@ -37,9 +52,7 @@ const appPackageJson = require(paths.appPackageJson);
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
-const webpackDevClientEntry = require.resolve(
-  'react-dev-utils/webpackHotDevClient'
-);
+const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
 const reactRefreshOverlayEntry = require.resolve(
   'react-dev-utils/refreshOverlayInterop'
 );
@@ -93,11 +106,16 @@ module.exports = function (webpackEnv) {
   // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
   // Get environment variables to inject into our app.
   const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
-
+  console.log('env');
+  console.log(env);
   const shouldUseReactRefresh = env.raw.FAST_REFRESH;
 
   // common function to get style loaders
   const getStyleLoaders = (cssOptions, preProcessor) => {
+    console.log('cssOptions');
+    console.log(cssOptions);
+    console.log('preProcessor');
+    console.log(preProcessor);
     const loaders = [
       isEnvDevelopment && require.resolve('style-loader'),
       isEnvProduction && {

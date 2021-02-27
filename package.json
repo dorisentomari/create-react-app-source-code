@@ -1,6 +1,6 @@
 {
   "private:backup": true,
-  "workspaces": [
+  "workspaces:backup": [
     "packages/*"
   ],
   "scripts": {

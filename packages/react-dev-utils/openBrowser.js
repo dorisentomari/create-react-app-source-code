@@ -90,11 +90,7 @@ function startBrowserProcess(browser, url, args) {
         // on OSX Chromium-based browser with AppleScript
         execSync('ps cax | grep "' + chromiumBrowser + '"');
         execSync(
-          'osascript openChrome.applescript "' +
-            encodeURI(url) +
-            '" "' +
-            chromiumBrowser +
-            '"',
+          'osascript openChrome.applescript "' + encodeURI(url) + '" "' + chromiumBrowser + '"',
           {
             cwd: __dirname,
             stdio: 'ignore',
